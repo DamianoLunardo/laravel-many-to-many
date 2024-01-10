@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 use App\Models\Project;
 use Illuminate\Support\Str;
 use App\Models\Type;
+use App\Models\Tech;
 
 class ProjectSeeder extends Seeder
 {
@@ -15,6 +16,9 @@ class ProjectSeeder extends Seeder
     {
         $type = Type::all();
         $ids = $type->pluck('id');
+
+        $tech = Tech::all();
+        $ids_tech = $tech->pluck('id');
 
         for ($i = 0; $i < 10; $i++) {
             $new_project = new Project();
