@@ -20,7 +20,7 @@ class ProjectSeeder extends Seeder
         $tech = Tech::all();
         $ids_tech = $tech->pluck('id');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 300; $i++) {
             $new_project = new Project();
             $new_project->title = $faker->sentence(3);
             $new_project->content = $faker->paragraphs(3, true);
@@ -29,6 +29,7 @@ class ProjectSeeder extends Seeder
             $new_project->type_id = $faker->optional()->randomElement($ids);
 
             $new_project->save();
+            $new_project->tech()->attach($faker->randomElement($ids_tech, null));
         }
     }
 }
