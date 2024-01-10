@@ -32,6 +32,20 @@
         <input type="text" class="form-control" name="technologies" id="technologies" value="{{ old('technologies') }}">
     </div>
 
+    <div class="d-flex flex-wrap">
+        @foreach ($tech as $tech)
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="{{ $tech->id }}" id="tech-{{ $tech->id }}"  value="{{ $tech->id }}" checked>
+        <label class="form-check-label" for="tech-{{ $tech->id }}">
+          {{ $tech->name }}
+        </label>
+      </div>
+
+        @endforeach
+    </div>
+
+    
+
    
     <button type="submit" class="btn btn-primary">Save</button>
 
