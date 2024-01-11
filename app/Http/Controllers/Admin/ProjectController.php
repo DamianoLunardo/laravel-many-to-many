@@ -41,6 +41,8 @@ class ProjectController extends Controller
 
         if ($request->has('tech')) {
             $project->tech()->attach($request['tech']);
+        } else {
+            $project->tech()->detach();
         }
 
         return redirect()->route('admin.projects.show', $project);
@@ -72,6 +74,7 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
+        $project->tech()->sync([]);
         $project->delete();
         return redirect()->route('admin.projects.index');
     }
