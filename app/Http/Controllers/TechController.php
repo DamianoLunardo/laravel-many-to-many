@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTechRequest;
 use App\Http\Requests\UpdateTechRequest;
 use App\Models\Tech;
 
+
 class TechController extends Controller
 {
     /**

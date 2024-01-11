@@ -32,7 +32,18 @@ class ProjectController extends Controller
             'type_id' => 'required|nullable|exists:types,id',
             'content' => 'required|string|min:5',
             'technologies' => 'required',
+            'tech' => 'exists:types,id'
         ]);
+
+        $data = $request->all();
+
+        $project = Project::create($data);
+
+        if ($request->has('tech')) {
+            $project->tech()->attach($request['tech']);
+        }
+
+        return redirect()->route('admin.projects.show', $project);
     }
 
     public function show(Project $project)
@@ -43,12 +54,20 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $type = Type::all();
-        return view('admin.projects.edit', compact('project', 'type'));
+        $tech = Type::all();
+
+        return view('admin.projects.edit', compact('project', 'type', 'tech'));
     }
 
     public function update(Request $request, Project $project)
     {
-        
+        $request -> validate([
+            'title' => 'required|max:255|string|unique:projects',
+            'type_id' => 'required|nullable|exists:types,id',
+            'content' => 'required|string|min:5',
+            'technologies' => 'required',
+            'tech' => 'exists:types,id'
+        ]);
     }
 
     public function destroy(Project $project)

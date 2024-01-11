@@ -17,6 +17,18 @@
             </select>
         </div>
 
+        <div class="d-flex flex-wrap gap-4">
+            @foreach ($tech as $tech)
+        <div class="form-check">
+            <input name="tech[]" class="form-check-input" type="checkbox" value="{{ $tech->id }}" id="tech-{{ $tech->id }}"  value="{{ $tech->id }}" checked>
+            {{-- <label class="form-check-label" for="tech-{{ $tech->id }}" @checked(in_array($tech->id, old('tech', $project->tech->pluck('id')->all()))) > --}}
+              {{ $tech->name }}
+            </label>
+          </div>
+    
+            @endforeach
+        </div>
+
         <a href="{{ route('admin.projects.index') }}" class="btn btn-primary">Back</a>
        
         <a href="{{ route('admin.projects.index', $project) }}" class="btn btn-primary">Save</a>
